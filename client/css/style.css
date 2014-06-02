@@ -1,0 +1,27 @@
+body {
+    background-color: #eee;
+}
+
+.container{
+  margin-top: 20px;
+}
+
+.top-navbar{
+  background: #34495e;
+  color: #FFFFFF;
+  padding: 10px;
+}
+
+.nav-link {
+  list-style-type: none;
+  float: both;
+}
+
+.nav-link > li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.nav-link > li > a{
+  color: #FFFFFF;
+}

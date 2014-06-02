@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Message</title>
+<script src="js/lib/jquery.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<div class="top-navbar">
+	<ul class="nav-link">
+		<li><a href="#/signup"> Signup </a></li>
+		<li><a href="#/login"> Login </a></li>
+	</ul>
+</div>
+
+<div class="container">
+
+</div>
+
+	<!-- Login Form Template -->
+	<script type="text/template" id="loginTemplate">
+		<h4>Login</h4>
+		<form>
+			<input type="text" id="email" placeholder="Email ID">
+			<input type="password" id="password" placeholder="Password">
+			<input type="submit" value="login">
+		</form>
+	</script>
+
+
+	<!-- Sign-up Form Template -->
+	<script type="text/template" id="signupTemplate">
+		<h4>Sign-up Form</h4>
+		<form>
+			<input type="text" id="first_name" placeholder="First Name">
+			<br>
+			<input type="text" id="last_name" placeholder="Last Name">
+			<br>
+			<input type="text" id="email" placeholder="Email ID">
+			<br>
+			<input type="password" id="password" placeholder="Password">
+			<br>
+			<input type="password" id="password_confirmation" placeholder="Confirm Password">
+			<br>
+			<input type="submit" value="sign-up">
+		</form>
+	</script>
+
+	
+	
+
+
+
+
+
+<!-- <div class="container">
+	  <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+</div> -->
+
+<script src="js/lib/underscore.js"></script>
+<script src="js/lib/backbone.js"></script>
+<script src="js/lib/builtio-dev.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/views.js"></script>
+<script src="js/router.js"></script>
+<script src="js/models.js"></script>
+
+</body>
+</html>
