@@ -6,11 +6,12 @@ Built.initialize('bltfec4086e0f10d942','message');
 	var App = {};
 
 
+
 /*----------------------------------------/
 	Validating `user` object and registering
 /-----------------------------------------*/
 
-App.validateUser = function (user, callback) {
+Built.User.validate = function (user, callback) {
 	if(!user.first_name) {
 		callback.onError("First name is required.");
 	} else if(!user.last_name) {

@@ -3,11 +3,6 @@
 			return _.template( $('#' + id).html() );
 		}
 
-		function UserException(message) {
-   			this.message = message;
-   			this.name = "UserException";
-		}
-
 /*-------------------------------------------------------------/
 | Login View
 |--------------------------------------------------------------/
@@ -60,14 +55,28 @@ var SignupView = Backbone.View.extend({
 			password_confirmation : $.trim( $('#password_confirmation').val() )
 		};
 
-		//Validating user object
-		App.validateUser(user, { 
+		/*-------------------------------------------------------------
+			Custom `validate` function checks the user object values
+		-------------------------------------------------------------*/
+		Built.User.validate(user, { 
 			onSuccess : function(data, res) {
-				console.log(res);
-				console.log(data);
+				/*--------------------------------------------
+					On Successful validation `register` user
+					using `Built.User.register()` method
+				--------------------------------------------*/
+				Built.User.register(data, {
+					onSuccess : function(data, res) {
+						alert('User Created Successfully!');
+					},
+					onError : function(error) {
+						//Alert user registration error
+						alert(error.error_message);
+					}
+				})
 			},
 			onError : function(error) {
-				console.log(error);
+				//Alert Validation Error
+				alert(error);
 			}
 		});
 	}
