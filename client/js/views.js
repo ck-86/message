@@ -1,8 +1,3 @@
-		//--- Template Helper ---//
-		window.getTemplate = function(id) {
-			return _.template( $('#' + id).html() );
-		}
-
 /*-------------------------------------------------------------/
 | Login View
 |--------------------------------------------------------------/
@@ -25,12 +20,33 @@ var LoginView = Backbone.View.extend({
 
 	submit: function(e) {
 		e.preventDefault();
-		console.log('Login....');
+		var user = {
+			email : $.trim( $('#login_email').val() ),
+			password : $.trim( $('#login_password').val() ),
+		};
+
+		// Show preloader
+		$('.login').html('Loading...');
+
+		Built.User.login(user.email, user.password, {
+			onSuccess : function(data, res){
+				if(res.status === 200){
+					$('.login').html('User Logged In');
+				}
+			},
+
+			onError : function(error) {
+				console.log(error);
+			}
+		});
 	}
 });
 
-
-//--- FormView ---//
+/*-------------------------------------------------------------/
+| Signup From View
+|--------------------------------------------------------------/
+| User Registeration Form
+*/
 var SignupView = Backbone.View.extend({
 	template : getTemplate('signupTemplate'),
 
@@ -46,14 +62,18 @@ var SignupView = Backbone.View.extend({
 	submit: function(e) {
 		e.preventDefault();
 		
-		//Creating User Object & trimming whitespaces 
+		//Getting Values from the form
 		var user = {
 			first_name : $.trim( $('#first_name').val() ),
 			last_name : $.trim( $('#last_name').val() ),
 			email : $.trim( $('#email').val() ),
 			password : $.trim( $('#password').val() ),
-			password_confirmation : $.trim( $('#password_confirmation').val() )
+			password_confirmation : $.trim( $('#password_confirmation').val() ),
+			active : true
 		};
+
+		// Show preloader
+		$('.signup').html('Loading...');
 
 		/*-------------------------------------------------------------
 			Custom `validate` function checks the user object values
@@ -66,16 +86,26 @@ var SignupView = Backbone.View.extend({
 				--------------------------------------------*/
 				Built.User.register(data, {
 					onSuccess : function(data, res) {
-						alert('User Created Successfully!');
+						// Remove sign-up form
+						$(".signup").children().fadeOut();
+
+						var message = "<strong>You have successfully completed registeration.</strong>\
+						<p>Please check your email and activate your account.</p>\
+						<p><a href='#/login'>Click Here To Login</a></p>";
+
+						// Show Successful Sign-up message
+						$(".signup").html( message );
 					},
 					onError : function(error) {
-						//Alert user registration error
-						alert(error.error_message);
+						//User registeration error
+						if(error.errors.email) {
+							alert('Email ' + error.errors.email );
+						}
 					}
 				})
 			},
 			onError : function(error) {
-				//Alert Validation Error
+				//Validation Error
 				alert(error);
 			}
 		});

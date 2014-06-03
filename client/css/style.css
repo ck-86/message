@@ -4,12 +4,13 @@ body {
 
 .container{
   margin-top: 20px;
+  padding: 20px;
 }
 
 .top-navbar{
   background: #34495e;
   color: #FFFFFF;
-  padding: 10px;
+  padding: 5px;
 }
 
 .nav-link {
@@ -18,10 +19,29 @@ body {
 }
 
 .nav-link > li {
+  margin-top: 5px;
   display: inline-block;
   margin-right: 20px;
 }
 
 .nav-link > li > a{
   color: #FFFFFF;
+}
+
+.form-control{
+  margin-bottom: 20px;
+}
+
+.form-group {
+}
+
+.button-right{ 
+  text-align: right;
+}
+
+.signup,.login {
+  height: 400px;
+  padding:20px;
+  background: #FFFFFF;
+  box-shadow: 1px 1px 4px #888888;
 }

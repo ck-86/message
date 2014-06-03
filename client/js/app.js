@@ -1,15 +1,15 @@
 Built.initialize('bltfec4086e0f10d942','message');
 
 /*----------------------------------------/
-	Creating App Scope
+	Template Helper Function
 /-----------------------------------------*/
-	var App = {};
+window.getTemplate = function(id) {
+	return _.template( $('#' + id).html() );
+}
 
-
-
-/*----------------------------------------/
+/*-------------------------------------------/
 	Validating `user` object and registering
-/-----------------------------------------*/
+/--------------------------------------------*/
 
 Built.User.validate = function (user, callback) {
 	if(!user.first_name) {
@@ -28,7 +28,3 @@ Built.User.validate = function (user, callback) {
 		callback.onSuccess(user,"User is valid.");
 	}
 };
-
-App.registerUser = function (user){
-	//Store on built.io
-}

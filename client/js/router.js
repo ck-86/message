@@ -5,26 +5,28 @@
 */
 var AppRouter = Backbone.Router.extend({
 	routes : {
-		"" : "loginRoute", // Login-Page is our default Rout
-		"login"	: "loginRoute",
-		"signup" : "signupRoute",
-		"*notFound" : "notFound"
+		"" : "defaultRoute", // Login-Page is our default Route
+		"*notFound" : "notFound" //404
 	}
 });
 
 var appRouter = new AppRouter;
 
-appRouter.on('route:loginRoute', function () {
+appRouter.on('route:defaultRoute', function() {
+	document.title = "Home Page";
+
+	var signupView = new SignupView;
+	$('.signup').html( signupView.render().el );
+
+	//$('.signup').html('<h3>Signup</h3>');
+
 	var loginView = new LoginView;
-	$('.container').html( loginView.render().el );
+	$('.login').html( loginView.render().el );
 });
 
-appRouter.on('route:signupRoute', function () {
-	var signupView = new SignupView;
-	$('.container').html( signupView.render().el );
-});
 
 appRouter.on('route:notFound', function() {
+	document.title = "404 - Page Not Found";
 	$('.container').html('<h3>404 - Page not found...</h3>');
 });
 
