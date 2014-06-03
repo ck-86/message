@@ -6,6 +6,7 @@
 var AppRouter = Backbone.Router.extend({
 	routes : {
 		"" : "defaultRoute", // Login-Page is our default Route
+		"compose" : "composeRoute",
 		"*notFound" : "notFound" //404
 	}
 });
@@ -16,12 +17,16 @@ appRouter.on('route:defaultRoute', function() {
 	document.title = "Home Page";
 
 	var signupView = new SignupView;
-	$('.signup').html( signupView.render().el );
+	$('.row').append( signupView.render().el );
 
 	//$('.signup').html('<h3>Signup</h3>');
 
 	var loginView = new LoginView;
-	$('.login').html( loginView.render().el );
+	$('.row').append( loginView.render().el );
+});
+
+appRouter.on('route:composeRoute', function() {
+	document.title = "Compose New Message"
 });
 
 

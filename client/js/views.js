@@ -25,18 +25,25 @@ var LoginView = Backbone.View.extend({
 			password : $.trim( $('#login_password').val() ),
 		};
 
-		// Show preloader
-		$('.login').html('Loading...');
+		if(user.email && user.password){
+			// Show preloader
+			$('.login').append('<p class="notification">Loading...</p>');
+		} else {
+			alert('Email and Password is required to login.');
+		}
+		
 
 		Built.User.login(user.email, user.password, {
 			onSuccess : function(data, res){
+				$('.notification').remove();
 				if(res.status === 200){
 					$('.login').html('User Logged In');
 				}
 			},
 
 			onError : function(error) {
-				console.log(error);
+				$('.notification').remove();
+				alert(error.errors.errors[0]);
 			}
 		});
 	}
@@ -73,7 +80,7 @@ var SignupView = Backbone.View.extend({
 		};
 
 		// Show preloader
-		$('.signup').html('Loading...');
+		// $('.signup').html('Loading...');
 
 		/*-------------------------------------------------------------
 			Custom `validate` function checks the user object values

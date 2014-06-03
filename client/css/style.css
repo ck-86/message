@@ -1,5 +1,5 @@
 body {
-    background-color: #eee;
+    background-color: #EEEEEE;
 }
 
 .container{
@@ -32,9 +32,6 @@ body {
   margin-bottom: 20px;
 }
 
-.form-group {
-}
-
 .button-right{ 
   text-align: right;
 }
@@ -43,5 +40,37 @@ body {
   height: 400px;
   padding:20px;
   background: #FFFFFF;
+}
+
+.row{
   box-shadow: 1px 1px 4px #888888;
+  background: #FFFFFF;
+  padding-bottom: 0px;
+}
+
+.sidebar,.main{
+  padding: 0px;
+}
+
+.sidebar{
+  border-right: 1px solid #CCCCCC;
+}
+
+.main{
+  background: #FFFFFF;
+  padding: 20px;
+}
+
+.sidebar > li {
+  list-style: none;
+  padding: 5px;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.sidebar > li:last-child {
+  border-bottom: none;
+}
+
+.sidebar > li > a {
+  display:block;
 }
