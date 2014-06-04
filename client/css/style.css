@@ -1,5 +1,5 @@
 body {
-    background-color: #EEEEEE;
+
 }
 
 .container{
@@ -43,9 +43,8 @@ body {
 }
 
 .row{
-  box-shadow: 1px 1px 4px #888888;
+  box-shadow: 0px 0px 5px #888888;
   background: #FFFFFF;
-  padding-bottom: 0px;
 }
 
 .sidebar,.main{
@@ -54,6 +53,7 @@ body {
 
 .sidebar{
   border-right: 1px solid #CCCCCC;
+  padding: 10px;
 }
 
 .main{
@@ -67,10 +67,11 @@ body {
   border-bottom: 1px solid #CCCCCC;
 }
 
-.sidebar > li:last-child {
-  border-bottom: none;
-}
-
 .sidebar > li > a {
   display:block;
+}
+
+#compose-form {
+padding: 10px;
+  border-bottom:1px solid #CECECE;
 }

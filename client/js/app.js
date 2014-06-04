@@ -7,6 +7,7 @@ window.getTemplate = function(id) {
 	return _.template( $('#' + id).html() );
 }
 
+
 /*-------------------------------------------/
 	Validating `user` object and registering
 /--------------------------------------------*/
@@ -28,3 +29,18 @@ Built.User.validate = function (user, callback) {
 		callback.onSuccess(user,"User is valid.");
 	}
 };
+
+
+/*-------------------------------------------------------------/
+| Show Progress Bar
+|--------------------------------------------------------------/
+| This will display Simple Pre-loader
+*/
+var showProgressbar = function(){
+
+	var progressbar = '<div class="progress progress-striped notification active"> \
+			<div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">\
+			<span class="sr-only">Loading...</span></div></div>';
+
+	return progressbar;
+}

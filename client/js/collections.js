@@ -1,9 +1,9 @@
-var Message = Built.Object.extend("message");
-
-
-
 /*-------------------------------------------------------------/
-| Model
+| Collections
 |--------------------------------------------------------------/
 | 
 */
+
+var Messages = Backbone.Collection.extend({
+	
+});

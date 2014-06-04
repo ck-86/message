@@ -26,8 +26,9 @@ var LoginView = Backbone.View.extend({
 		};
 
 		if(user.email && user.password){
+
 			// Show preloader
-			$('.login').append('<p class="notification">Loading...</p>');
+			$('.login').append( showProgressbar(50) );
 		} else {
 			alert('Email and Password is required to login.');
 		}
@@ -35,9 +36,9 @@ var LoginView = Backbone.View.extend({
 
 		Built.User.login(user.email, user.password, {
 			onSuccess : function(data, res){
-				$('.notification').remove();
 				if(res.status === 200){
-					$('.login').html('User Logged In');
+					$('.notification').remove();
+					Backbone.history.navigate("#/compose");
 				}
 			},
 
@@ -117,4 +118,64 @@ var SignupView = Backbone.View.extend({
 			}
 		});
 	}
+});
+
+/*-------------------------------------------------------------/
+| Sidebar View
+|--------------------------------------------------------------/
+| Sidebar View with options
+*/
+
+var SidebarView = Backbone.View.extend({
+	template : getTemplate('sidebarTemplate'),
+
+	render: function(){
+		this.$el.html( this.template() );
+		return this;
+	}
+});
+
+/*-------------------------------------------------------------/
+| Compose Message Template
+|--------------------------------------------------------------/
+| Renders the Message textarea
+*/
+
+var ComposeView = Backbone.View.extend({
+
+	initialize: function(){
+		console.log(this.model);
+	},
+
+	template : getTemplate('composeTemplate'),
+
+	render: function() {
+		this.$el.html( this.template(this.model) );
+		return this;
+	},
+
+	events : {
+		'click .send' : 'send'
+	},
+
+	send: function(e){
+		e.preventDefault();
+		var messageObject = {
+			'message_creator_uid' : Built.User.getCurrentUser().uid,
+			'message_body' : $('#message_body').val()
+		};
+		
+		var message = new Message;
+		message.set(messageObject); // Setting Value
+		message.save({
+			onSuccess : function(data) {
+				alert('1 Message Sent.');
+				$('#message_body').val('');
+			},
+			onError : function(error) {
+				console.log(error);
+			}
+		});
+	}
+
 });

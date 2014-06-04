@@ -27,19 +27,6 @@
 
 <div class="container">
 	<div class="row">
-
-
-		<div class="sidebar col-md-3">
-				<li><a href="#/compose">Compose</a></li>
-				<li><a href="#/inbox">Inbox</a></li>
-		</div>
-		
-		<div class="main col-md-9">
-			<input type="text" placeholder="To" class="form-control">
-			<input type="text" placeholder="Subject" class="form-control">
-			<textarea class="form-control" rows="3"></textarea>
-		</div>
-
 	</div>
 </div>
 	
@@ -74,8 +61,8 @@
 			<form>
 				<div class="form-group">
 					<h4>Login</h4>
-					<input type="text" id="login_email" placeholder="Email ID" class="form-control">
-					<input type="password" id="login_password" placeholder="Password" class="form-control">
+					<input type="text" id="login_email" placeholder="Email ID" class="form-control" value="chetan.kantharia@raweng.com">
+					<input type="password" id="login_password" placeholder="Password" class="form-control" value="kpm123">
 					<div class="button-right">
 						<input type="submit" value="Login" class="btn btn-success" id="signup-button">
 					</div>
@@ -85,14 +72,49 @@
 	</div>
 	</script>
 
+	<!-- Sidebar Template -->
+	<script type="text/template" id="sidebarTemplate">
+		<div class="sidebar col-md-3">
+			<li><a href="#/compose">Compose</a></li>
+			<li><a href="#/inbox">Inbox</a></li>
+		</div>
+	</script>
+
+
+	<!-- Compose Message Template -->
+	<script type="text/template" id="composeTemplate">
+		<div class="main col-md-9">
+			<form id="compose-form">
+				<div class="button-right">
+					
+					<% if(email===undefined) {%>
+						<%= "email not defined." %>
+					<% } else { %>
+						<%= email %>
+					<% } %>
+
+				</div>
+
+				<textarea class="form-control" rows="3" id="message_body"></textarea>
+				<div class="button-right">
+					<button class='send btn btn-md btn-success'>
+						<span class="glyphicon glyphicon-send"></span>
+							Send Message
+					</button>
+				</div>
+			</form>
+		</div>
+	</script>
+
 <script src="js/lib/underscore.js"></script>
 <script src="js/lib/backbone.js"></script>
 <script src="js/lib/builtio-dev.js"></script>
 
 <script src="js/app.js"></script>
+<script src="js/models.js"></script>
+<script src="js/collections.js"></script>
 <script src="js/views.js"></script>
 <script src="js/router.js"></script>
-<script src="js/models.js"></script>
 
 </body>
 </html>
