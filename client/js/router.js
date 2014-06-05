@@ -7,6 +7,7 @@ var AppRouter = Backbone.Router.extend({
 	routes : {
 		"" : "defaultRoute", // Login-Page is our default Route
 		"compose" : "composeRoute",
+		"users(/:email)" : "usersRoute",
 		"*notFound" : "notFound" //404
 	}
 });
@@ -43,9 +44,9 @@ appRouter.on('route:composeRoute', function() {
 
 			var composeView = new ComposeView( { model : Built.User.getCurrentUser() } );
 			$('.row').append( composeView.render().el );
-		}
 
-		
+			var recipientControl = new RecipientControl;
+		}
 });
 
 
@@ -56,6 +57,12 @@ appRouter.on('route:notFound', function() {
 	$('.row').html('');
 
 	$('.row').html('<h3>404 - Page not found...</h3>');
+});
+
+
+appRouter.on('route:usersRoute', function(email) {
+	document.title = "Users";
+	window.users = []; //Array list of all users
 });
 
 Backbone.history.start();

@@ -43,4 +43,33 @@ var showProgressbar = function(){
 			<span class="sr-only">Loading...</span></div></div>';
 
 	return progressbar;
-}
+};
+
+/*-------------------------------------------------------------/
+| Get Users Email List
+|--------------------------------------------------------------/
+| Fetching Users First name Last name, Email and UID, this 
+| will be stored in `Users` collection
+*/
+var getUsersList = function() {
+	window.users = new Users; //Backbone Collection 
+
+	var userQuery = new Built.Query('built_io_application_user');
+		userQuery.where('active', true);
+		userQuery.ascending('email');
+	
+		userQuery.exec().then( function(data) {
+			data.forEach( function(user) {
+				var myUser = {
+					'uid' : user.get('uid'),
+					'first_name' : user.get('first_name'),
+					'last_name' : user.get('last_name'),
+					'email' : user.get('email')
+				};
+
+				users.add(myUser);
+			});
+		});
+		
+	return this;
+};

@@ -109,6 +109,8 @@ var SignupView = Backbone.View.extend({
 						if(error.errors.email) {
 							alert('Email ' + error.errors.email );
 						}
+
+						//If Account is Inactive - code is needed
 					}
 				})
 			},
@@ -144,7 +146,6 @@ var SidebarView = Backbone.View.extend({
 var ComposeView = Backbone.View.extend({
 
 	initialize: function(){
-		console.log(this.model);
 	},
 
 	template : getTemplate('composeTemplate'),
@@ -178,4 +179,44 @@ var ComposeView = Backbone.View.extend({
 		});
 	}
 
+});
+
+/*-------------------------------------------------------------/
+| Recipient Form Control Box
+|--------------------------------------------------------------/
+| `To` form-control in compose view
+*/
+
+var RecipientControl = Backbone.View.extend({
+	el : '#recipient-form-control',
+
+	initialize: function() {
+		console.log('Getting User List...');
+		this.render();
+		//this.getUsersList( this.showUsers );
+	},
+
+	getUsersList : function(callback) {
+		var userQuery = new Built.Query('built_io_application_user');
+		userQuery.where('active', true);
+		userQuery.ascending('email');
+	
+		userQuery.exec().
+		then( function(data) {
+			window.users = new Users;
+			_.each(data, function(user) {
+				users.add(user);
+			});
+
+			// If `users` collection is set then call callback function
+			if(users){
+				callback();
+			}
+		});
+	},
+
+	render: function() {
+		this.$el.html("<select class='form-control'><option>Hello</option></select>");
+		return this;
+	}
 });
