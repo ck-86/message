@@ -44,8 +44,6 @@ appRouter.on('route:composeRoute', function() {
 
 			var composeView = new ComposeView( { model : Built.User.getCurrentUser() } );
 			$('.row').append( composeView.render().el );
-
-			var recipientControl = new RecipientControl;
 		}
 });
 

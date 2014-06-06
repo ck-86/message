@@ -146,6 +146,17 @@ var SidebarView = Backbone.View.extend({
 var ComposeView = Backbone.View.extend({
 
 	initialize: function(){
+		//Generate User List in `To` field
+		getUsersList( function() {
+			_.each(users.models, function(user){
+				var recipientControl = new RecipientControl;
+				recipientControl.render(user.toJSON());
+			}, this);
+
+			$("#message_recipient_uid").show();
+			$(".chosen-select").chosen();
+		});
+
 	},
 
 	template : getTemplate('composeTemplate'),
@@ -163,7 +174,8 @@ var ComposeView = Backbone.View.extend({
 		e.preventDefault();
 		var messageObject = {
 			'message_creator_uid' : Built.User.getCurrentUser().uid,
-			'message_body' : $('#message_body').val()
+			'message_body' : $('#message_body').val(),
+			'message_recipient_uid' : $('#message_recipient_uid').val()
 		};
 		
 		var message = new Message;
@@ -188,35 +200,13 @@ var ComposeView = Backbone.View.extend({
 */
 
 var RecipientControl = Backbone.View.extend({
-	el : '#recipient-form-control',
+	el : '#message_recipient_uid',
 
-	initialize: function() {
-		console.log('Getting User List...');
-		this.render();
-		//this.getUsersList( this.showUsers );
-	},
+	template : getTemplate('recipientTemplate'),
 
-	getUsersList : function(callback) {
-		var userQuery = new Built.Query('built_io_application_user');
-		userQuery.where('active', true);
-		userQuery.ascending('email');
-	
-		userQuery.exec().
-		then( function(data) {
-			window.users = new Users;
-			_.each(data, function(user) {
-				users.add(user);
-			});
-
-			// If `users` collection is set then call callback function
-			if(users){
-				callback();
-			}
-		});
-	},
-
-	render: function() {
-		this.$el.html("<select class='form-control'><option>Hello</option></select>");
+	render: function(user) {
+		console.log(user);
+		this.$el.append( this.template( user ) );
 		return this;
 	}
 });

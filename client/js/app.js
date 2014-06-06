@@ -51,7 +51,7 @@ var showProgressbar = function(){
 | Fetching Users First name Last name, Email and UID, this 
 | will be stored in `Users` collection
 */
-var getUsersList = function() {
+var getUsersList = function(callback) {
 	window.users = new Users; //Backbone Collection 
 
 	var userQuery = new Built.Query('built_io_application_user');
@@ -69,7 +69,18 @@ var getUsersList = function() {
 
 				users.add(myUser);
 			});
-		});
-		
-	return this;
+		}).then(
+			function(data){
+				if(users){
+					callback();
+				}
+			}
+		);
 };
+
+/*-------------------------------------------------------------/
+| Multi Select Box
+|--------------------------------------------------------------/
+| 
+*/
+

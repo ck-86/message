@@ -76,3 +76,8 @@ body {
 padding: 10px;
   border-bottom:1px solid #CECECE;
 }
+
+#message_recipient_uid {
+  font: 15px;
+  margin: 0px;
+}
